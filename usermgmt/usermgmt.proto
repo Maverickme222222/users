@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package usermgmt;
+
+option go_package = "github.com/Maverickme222222/users/usermgmt";
+
+service UserManagement {
+    rpc CreateNewUser(NewUser) returns (NewUserResponse) {}
+}
+
+message NewUser {
+    string name = 1;
+}
+
+message NewUserResponse {
+    string name = 1;
+}
