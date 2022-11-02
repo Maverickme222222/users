@@ -10,8 +10,5 @@ commonLabels:
   app.kubernetes.io/managed-by: argocd
 
 
-resources:
-- namespace.yml
-
 patches:
 - patch/deployment_patch.yml
