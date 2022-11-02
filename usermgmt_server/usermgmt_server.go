@@ -7,8 +7,10 @@ import (
 	"math/rand"
 	"net"
 
+	"github.com/Maverickme222222/users/health"
 	pb "github.com/Maverickme222222/users/usermgmt"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/health/grpc_health_v1"
 )
 
 const (
@@ -37,6 +39,9 @@ func main() {
 	s := grpc.NewServer()
 
 	pb.RegisterUserManagementServer(s, &UserManagementServer{})
+
+	healthService := health.NewHealthChecker()
+	grpc_health_v1.RegisterHealthServer(s, healthService)
 	log.Printf("User Server listening at %v", listen.Addr().String())
 	if err := s.Serve(listen); err != nil {
 		log.Fatalf("failed to serve: %v", err)
