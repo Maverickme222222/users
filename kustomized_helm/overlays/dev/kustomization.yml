@@ -4,7 +4,7 @@ kind: Kustomization
 bases:
 - ../../helm_base
 
-namespace: helm-guestbook-dev
+namespace: default
 commonLabels:
   app.kubernetes.io/part-of: argocd-app-of-apps-example
   app.kubernetes.io/managed-by: argocd
