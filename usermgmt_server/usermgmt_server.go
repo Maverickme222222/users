@@ -11,6 +11,7 @@ import (
 	pb "github.com/Maverickme222222/users/usermgmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health/grpc_health_v1"
+	"google.golang.org/grpc/reflection"
 )
 
 const (
@@ -37,6 +38,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
+	reflection.Register(s)
 
 	pb.RegisterUserManagementServer(s, &UserManagementServer{})
 
