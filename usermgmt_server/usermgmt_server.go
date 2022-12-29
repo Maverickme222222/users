@@ -11,6 +11,7 @@ import (
 	pb "github.com/Maverickme222222/users/usermgmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health/grpc_health_v1"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/reflection"
 )
 
@@ -23,9 +24,12 @@ type UserManagementServer struct {
 }
 
 func (s *UserManagementServer) CreateNewUser(ctx context.Context, req *pb.NewUser) (*pb.NewUserResponse, error) {
-	log.Printf("Received: %v", req.Name)
+	log.Printf("Received: %v\n", req.Name)
 	var user_id int32 = int32(rand.Intn(1000))
 	user := fmt.Sprintf("Added new user id %v for name %v", user_id, req.GetName())
+	md, _ := metadata.FromIncomingContext(ctx)
+	log.Printf("Received Headers: %+v", md)
+
 	return &pb.NewUserResponse{
 		Name: user,
 	}, nil
